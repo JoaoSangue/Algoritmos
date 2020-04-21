@@ -2,6 +2,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 
+
 /*
  * Creates Tree
  */
@@ -35,26 +36,74 @@ void insertNode (node **root, int value)
 
     if ( (*root)->value > value )
     {
-        insertNode(&(*root)->left, value);
+        insertNode( &(*root)->left, value );
     }
     else
     {
-        insertNode(&(*root)->right, value);
+        insertNode( &(*root)->right, value );
     }
 }
+
+
+/*
+ * Removing from Tree
+ */
+int removeFromTree (binarySearchTree *tree, int value)
+{
+    return removeNode ( &(*tree).root, value );
+}
+
+int removeNode (node **root, int value)
+{
+    if ( !(*root) ) return 0;
+
+    if ( (*root)->value == value )
+    {
+        node **lookUp;
+        node *aux;
+        if( (*root)->right )
+        {
+            lookUp = &(*root)->right;
+            while ( (*lookUp)->left != NULL )
+            {
+                lookUp = &(*lookUp)->left;
+            }
+            aux             = (*lookUp);
+            (*lookUp)       = (*lookUp)->right;
+            (*root)->value  = aux->value;
+        } 
+        else
+        {
+            lookUp  = &(*root)->left;
+            aux     = (*root);
+            root    = lookUp;
+        }
+        free(aux);
+        return 1;
+    }
+
+    if ( (*root)->value > value )
+    {
+        return removeNode ( &(*root)->left, value );
+    }
+    else
+    {
+        return removeNode ( &(*root)->right, value );
+    }
+}
+
 
 /*
  * Searching for a Node
  */
-
-int searchTree(binarySearchTree *tree, int value)
+int searchTree (binarySearchTree *tree, int value)
 {
     return findNode((*tree).root, value);
 }
 
-int findNode(node *root, int value)
+int findNode (node *root, int value)
 {
-    if(!root) return 0;
+    if( !root ) return 0;
 
     if ( (*root).value == value )
     {
@@ -62,11 +111,11 @@ int findNode(node *root, int value)
     }
     else if ( (*root).value > value )
     {
-        return findNode((*root).left, value);
+        return findNode ( (*root).left, value );
     }
     else
     {
-        return findNode((*root).right, value);
+        return findNode ( (*root).right, value );
     }
 }
 
@@ -83,12 +132,12 @@ void inOrder (node *root)
 {
     if ( (*root).left ) 
     {
-        inOrder( (*root).left );
+        inOrder ( (*root).left );
     }
-    printf( "%d ", (*root).value );
+    printf ( "%d ", (*root).value );
     if ( (*root).right ) 
     {
-        inOrder( (*root).right );
+        inOrder ( (*root).right );
     }
 }
 

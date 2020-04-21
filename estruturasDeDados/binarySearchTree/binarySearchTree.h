@@ -13,10 +13,16 @@ typedef struct
 } binarySearchTree;
 
 binarySearchTree* createTree ();
-void insertNode (node **root, int value);
+
 void insertToTree (binarySearchTree *tree, int value);
-void inOrder (node *root);
+void insertNode (node **root, int value);
+
 void showInOrder (binarySearchTree *tree);
+void inOrder (node *root);
+
+int removeFromTree (binarySearchTree *tree, int value);
+int removeNode (node **root, int value);
+
 int searchTree(binarySearchTree *tree, int value);
 int findNode(node *root, int value);
 
