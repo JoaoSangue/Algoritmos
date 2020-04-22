@@ -6,9 +6,9 @@
 /*
  * Creates Tree
  */
-binarySearchTree* createTree ()
+binary_search_tree* create_tree ()
 {
-    binarySearchTree *newTree = (binarySearchTree*) malloc( sizeof(binarySearchTree) );
+    binary_search_tree *newTree = (binary_search_tree*) malloc( sizeof(binary_search_tree) );
     newTree->root = NULL;
     return newTree;
 }
@@ -17,12 +17,7 @@ binarySearchTree* createTree ()
 /*
  * Inserting in Tree
  */
-void insertToTree (binarySearchTree *tree, int value)
-{
-    insertNode ( &(*tree).root, value );
-}
-
-void insertNode (node **root, int value)
+static void insert_node (node **root, int value)
 {
     if ( !(*root) )
     {
@@ -36,47 +31,47 @@ void insertNode (node **root, int value)
 
     if ( (*root)->value > value )
     {
-        insertNode( &(*root)->left, value );
+        insert_node( &(*root)->left, value );
     }
     else
     {
-        insertNode( &(*root)->right, value );
+        insert_node( &(*root)->right, value );
     }
+}
+
+void insert_to_tree (binary_search_tree *tree, int value)
+{
+    insert_node ( &tree->root, value );
 }
 
 
 /*
  * Removing from Tree
  */
-int removeFromTree (binarySearchTree *tree, int value)
-{
-    return removeNode ( &(*tree).root, value );
-}
-
-int removeNode (node **root, int value)
+static int remove_node (node **root, int value)
 {
     if ( !(*root) ) return 0;
 
     if ( (*root)->value == value )
     {
-        node **lookUp;
+        node **lookup;
         node *aux;
         if( (*root)->right )
         {
-            lookUp = &(*root)->right;
-            while ( (*lookUp)->left != NULL )
+            lookup = &(*root)->right;
+            while ( (*lookup)->left != NULL )
             {
-                lookUp = &(*lookUp)->left;
+                lookup = &(*lookup)->left;
             }
-            aux             = (*lookUp);
-            (*lookUp)       = (*lookUp)->right;
+            aux             = (*lookup);
+            (*lookup)       = (*lookup)->right;
             (*root)->value  = aux->value;
         } 
         else
         {
-            lookUp  = &(*root)->left;
+            lookup  = &(*root)->left;
             aux     = (*root);
-            root    = lookUp;
+            root    = lookup;
         }
         free(aux);
         return 1;
@@ -84,61 +79,65 @@ int removeNode (node **root, int value)
 
     if ( (*root)->value > value )
     {
-        return removeNode ( &(*root)->left, value );
+        return remove_node ( &(*root)->left, value );
     }
     else
     {
-        return removeNode ( &(*root)->right, value );
+        return remove_node ( &(*root)->right, value );
     }
+}
+
+int remove_from_tree (binary_search_tree *tree, int value)
+{
+    return remove_node ( &tree->root, value );
 }
 
 
 /*
  * Searching for a Node
  */
-int searchTree (binarySearchTree *tree, int value)
-{
-    return findNode((*tree).root, value);
-}
-
-int findNode (node *root, int value)
+static int find_node (node *root, int value)
 {
     if( !root ) return 0;
 
-    if ( (*root).value == value )
+    if ( root->value == value )
     {
         return 1;
     }
-    else if ( (*root).value > value )
+    else if ( root->value > value )
     {
-        return findNode ( (*root).left, value );
+        return find_node ( root->left, value );
     }
     else
     {
-        return findNode ( (*root).right, value );
+        return find_node ( root->right, value );
     }
 }
+
+int search_tree (binary_search_tree *tree, int value)
+{
+    return find_node ( tree->root, value );
+}
+
 
 /*
  * Printing Tree
  */
-void showInOrder (binarySearchTree *tree)
+static void in_order (node *root)
 {
-    inOrder( (*tree).root );
-    printf( "\n" );
-}
-
-void inOrder (node *root)
-{
-    if ( (*root).left ) 
+    if ( root->left ) 
     {
-        inOrder ( (*root).left );
+        in_order ( root->left );
     }
-    printf ( "%d ", (*root).value );
-    if ( (*root).right ) 
+    printf ( "%d ", root->value );
+    if ( root->right ) 
     {
-        inOrder ( (*root).right );
+        in_order ( root->right );
     }
 }
 
-
+void show_in_order (binary_search_tree *tree)
+{
+    in_order ( tree->root );
+    printf ( "\n" );
+}

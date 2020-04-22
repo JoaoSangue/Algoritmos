@@ -10,20 +10,14 @@ typedef struct node
 typedef struct 
 {
     node *root;
-} binarySearchTree;
+} binary_search_tree;
 
-binarySearchTree* createTree ();
+binary_search_tree* create_tree ();
 
-void insertToTree (binarySearchTree *tree, int value);
-void insertNode (node **root, int value);
+void insert_to_tree (binary_search_tree *tree, int value);
+void show_in_order (binary_search_tree *tree);
 
-void showInOrder (binarySearchTree *tree);
-void inOrder (node *root);
-
-int removeFromTree (binarySearchTree *tree, int value);
-int removeNode (node **root, int value);
-
-int searchTree(binarySearchTree *tree, int value);
-int findNode(node *root, int value);
+int remove_from_tree (binary_search_tree *tree, int value);
+int search_tree (binary_search_tree *tree, int value);
 
 #endif

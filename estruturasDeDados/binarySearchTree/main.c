@@ -3,28 +3,28 @@
 
 int main()
 {
-    binarySearchTree *tree = createTree();
-    insertToTree( tree, 25 );
-    insertToTree( tree, 10 );
-    insertToTree( tree, 50 );
-    insertToTree( tree, 5 );
-    insertToTree( tree, 500 );
-    insertToTree( tree, 15 );
-    insertToTree( tree, 25 );
-    insertToTree( tree, 40 );
-    insertToTree( tree, 30 );
-    insertToTree( tree, 35 );
-    insertToTree( tree, 13 );
-    insertToTree( tree, 12 );
-    insertToTree( tree, 11 );
-    insertToTree( tree, 13 );
-    showInOrder( tree );
-    printf( "Achou 40? %d\n", searchTree(tree, 40) );
-    printf( "Achou 400? %d\n", searchTree(tree, 400) );
-    removeFromTree( tree, 50 );
-    removeFromTree( tree, 13 );
-    removeFromTree( tree, 25 );
-    showInOrder( tree );
+    binary_search_tree *tree = create_tree();
+    insert_to_tree( tree, 25 );
+    insert_to_tree( tree, 10 );
+    insert_to_tree( tree, 50 );
+    insert_to_tree( tree, 5 );
+    insert_to_tree( tree, 500 );
+    insert_to_tree( tree, 15 );
+    insert_to_tree( tree, 25 );
+    insert_to_tree( tree, 40 );
+    insert_to_tree( tree, 30 );
+    insert_to_tree( tree, 35 );
+    insert_to_tree( tree, 13 );
+    insert_to_tree( tree, 12 );
+    insert_to_tree( tree, 11 );
+    insert_to_tree( tree, 13 );
+    show_in_order( tree );
+    printf( "Achou 40? %d\n", search_tree(tree, 40) );
+    printf( "Achou 400? %d\n", search_tree(tree, 400) );
+    remove_from_tree( tree, 50 );
+    remove_from_tree( tree, 13 );
+    remove_from_tree( tree, 25 );
+    show_in_order( tree );
 
     return 0;
 }
