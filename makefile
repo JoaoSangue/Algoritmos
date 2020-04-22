@@ -15,7 +15,7 @@ CC_FLAGS=-c         \
 all: main
 
 main: $(OBJ)
-	$(CC) -o main $^
+	$(CC) -o main $^ -lm
 
 %.o: %.c
 	$(CC) $^ $(CC_FLAGS)
