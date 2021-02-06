@@ -44,6 +44,8 @@ static void merge(int *vetor, int inicio, int meio, int fim)
         vetor[i] = aux[k];
         i++;
     }
+
+    free(aux);
 }
 
 void merge_sort(int *vetor, int inicio, int fim)
